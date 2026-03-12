@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { LieuCulturel } from '../types';
 
-// 🇫🇷 Petit bonus pour impressionner le prof : On met le calendrier en Français !
 LocaleConfig.locales['fr'] = {
   monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
   monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
