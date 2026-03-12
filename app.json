@@ -4,10 +4,10 @@
     "slug": "UrbanExplorer",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/paris-tour-eiffel.jpg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/paris-tour-eiffel.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
