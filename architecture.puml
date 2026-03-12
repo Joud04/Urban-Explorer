@@ -1,0 +1,51 @@
+@startuml UrbanExplorerArchitecture
+
+title Architecture de l'application Urban Explorer
+
+package "Application" {
+
+    [App.tsx] --> [NavigationContainer]
+
+}
+
+package "Navigation" {
+
+    [NavigationContainer] --> [AppNavigator]
+
+    [AppNavigator] --> [DiscoveryScreen]
+    [AppNavigator] --> [MapScreen]
+    [AppNavigator] --> [ProfileScreen]
+
+}
+
+package "Screens" {
+
+    [DiscoveryScreen] --> [LieuCard]
+    [DiscoveryScreen] --> [PlaceDetailsModal]
+
+    [MapScreen] --> [MapView]
+    [MapView] --> [Markers]
+
+    [ProfileScreen] --> [Camera]
+    [ProfileScreen] --> [AsyncStorage]
+
+}
+
+package "Components" {
+
+    [LieuCard]
+
+}
+
+package "Services / Data" {
+
+    [API Open Data Paris]
+    [AsyncStorage]
+
+}
+
+[DiscoveryScreen] --> [API Open Data Paris] : fetch()
+[PlaceDetailsModal] --> [Calendar]
+[ProfileScreen] --> [AsyncStorage] : save photo + visits
+
+@enduml
