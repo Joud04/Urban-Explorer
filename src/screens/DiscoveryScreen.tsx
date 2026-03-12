@@ -19,8 +19,6 @@ export const DiscoveryScreen: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [selectedLieu, setSelectedLieu] = useState<LieuCulturel | null>(null);
   const [savedDates, setSavedDates] = useState<Record<string, string>>({});
-  
-  // Le State qui va retenir le texte tapé dans la barre de recherche
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -69,8 +67,6 @@ export const DiscoveryScreen: React.FC = () => {
     }
   };
 
-  //On filtre la liste des lieux en temps réel !
-  // Si searchQuery est vide, ça renvoie tout. Sinon, ça cherche les correspondances dans le nom.
   const filteredLieux = lieux.filter(lieu => 
     lieu.nom_usuel.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -78,7 +74,7 @@ export const DiscoveryScreen: React.FC = () => {
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="#e67e22" />
+        <ActivityIndicator size="large" color="#e17055" />
       </View>
     );
   }
@@ -87,27 +83,24 @@ export const DiscoveryScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      
-      {/* La Barre de recherche affichée tout en haut */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
-          placeholder="Rechercher un événement..."
-          placeholderTextColor="#7f8c8d"
+          placeholder="🔍 Rechercher un événement..."
+          placeholderTextColor="#b2bec3"
           value={searchQuery}
-          onChangeText={setSearchQuery} // Met à jour le State à chaque lettre tapée !
-          clearButtonMode="while-editing" // Ajoute une petite croix (sur iOS) pour effacer
+          onChangeText={setSearchQuery}
+          clearButtonMode="while-editing"
         />
       </View>
 
       <FlatList
-        data={filteredLieux} // On utilise la liste filtrée au lieu de la liste brute !
+        data={filteredLieux}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <LieuCard lieu={item} onPressDetails={() => setSelectedLieu(item)} />
         )}
-        contentContainerStyle={{ paddingBottom: 20, paddingTop: 10 }}
-        // Message au cas où la recherche ne donne aucun résultat
+        contentContainerStyle={{ paddingBottom: 100, paddingTop: 10 }}
         ListEmptyComponent={
           <Text style={styles.emptyText}>Aucun événement ne correspond à "{searchQuery}"</Text>
         }
@@ -115,27 +108,33 @@ export const DiscoveryScreen: React.FC = () => {
 
       <Modal visible={selectedLieu !== null} animationType="slide" onRequestClose={() => setSelectedLieu(null)}>
         {selectedLieu && (
-          <ScrollView style={styles.modalContainer}>
+          <ScrollView style={styles.modalContainer} bounces={false}>
             <Image source={{ uri: 'https://picsum.photos/400/200' }} style={styles.headerImage} />
             <View style={styles.infoContainer}>
               <Text style={styles.modalTitle}>{selectedLieu.nom_usuel}</Text>
-              <Text style={styles.address}>{selectedLieu.adresse}</Text>
+              <Text style={styles.address}>📍 {selectedLieu.adresse}</Text>
             </View>
 
-            <Text style={styles.subtitle}>📅 Planifiez votre visite :</Text>
-
-            <Calendar
-              onDayPress={(day: any) => handleDateSelection(day.dateString)}
-              markedDates={{
-                [currentDateForLieu || '']: { selected: true, selectedColor: '#e67e22' }
-              }}
-              theme={{ todayTextColor: '#e67e22', arrowColor: '#e67e22' }}
-            />
+            <View style={styles.calendarWrapper}>
+              <Text style={styles.subtitle}>📅 Planifiez votre visite</Text>
+              <Calendar
+                style={styles.calendar}
+                onDayPress={(day: any) => handleDateSelection(day.dateString)}
+                markedDates={{
+                  [currentDateForLieu || '']: { selected: true, selectedColor: '#e17055', selectedTextColor: '#fff' }
+                }}
+                theme={{ 
+                  todayTextColor: '#e17055', 
+                  arrowColor: '#e17055',
+                  textMonthFontWeight: 'bold',
+                }}
+              />
+            </View>
 
             {currentDateForLieu && (
               <View style={styles.confirmationBox}>
                 <Text style={styles.confirmationText}>
-                  ✅ Visite au {selectedLieu.nom_usuel} planifiée le {currentDateForLieu}
+                  ✅ Visite prévue le {currentDateForLieu}
                 </Text>
               </View>
             )}
@@ -151,43 +150,46 @@ export const DiscoveryScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f8f9fa' },
+  container: { flex: 1, backgroundColor: '#f5f6fa' },
   center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  
-  // Styles pour la barre de recherche
   searchContainer: {
     backgroundColor: '#fff',
-    padding: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
-    zIndex: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f1f2f6',
   },
   searchInput: {
     backgroundColor: '#f1f2f6',
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     fontSize: 16,
-    color: '#2c3e50',
+    color: '#2d3436',
   },
-  emptyText: {
-    textAlign: 'center',
-    marginTop: 30,
-    fontSize: 16,
-    color: '#7f8c8d',
-    fontStyle: 'italic',
+  emptyText: { textAlign: 'center', marginTop: 40, fontSize: 16, color: '#b2bec3', fontStyle: 'italic' },
+  
+  // Styles de la Modal
+  modalContainer: { flex: 1, backgroundColor: '#f5f6fa' },
+  headerImage: { width: '100%', height: 220 },
+  infoContainer: { 
+    padding: 20, 
+    backgroundColor: '#fff', 
+    borderTopLeftRadius: 24, 
+    borderTopRightRadius: 24, 
+    marginTop: -20, // Effet de chevauchement sur l'image
+    shadowColor: '#000', shadowOffset: { width: 0, height: -2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 5
   },
-  modalContainer: { flex: 1, backgroundColor: '#f8f9fa' },
-  headerImage: { width: '100%', height: 150 },
-  infoContainer: { padding: 15, backgroundColor: '#fff', marginBottom: 15 },
-  modalTitle: { fontSize: 20, fontWeight: 'bold', color: '#2c3e50', marginBottom: 5 },
-  address: { fontSize: 14, color: '#7f8c8d' },
-  subtitle: { fontSize: 18, fontWeight: 'bold', marginHorizontal: 15, marginBottom: 10, color: '#2c3e50' },
-  confirmationBox: { marginTop: 20, padding: 15, backgroundColor: '#d4edda', borderColor: '#c3e6cb', borderWidth: 1, borderRadius: 8, marginHorizontal: 15 },
-  confirmationText: { color: '#155724', fontWeight: 'bold', textAlign: 'center', fontSize: 14 },
-  closeButton: { backgroundColor: '#34495e', padding: 15, borderRadius: 8, margin: 20, alignItems: 'center' },
-  closeButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 }
+  modalTitle: { fontSize: 24, fontWeight: '900', color: '#2d3436', marginBottom: 8 },
+  address: { fontSize: 15, color: '#636e72', lineHeight: 22 },
+  
+  calendarWrapper: { marginTop: 15, marginHorizontal: 16 },
+  subtitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 15, color: '#2d3436' },
+  calendar: { borderRadius: 16, overflow: 'hidden', elevation: 2, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4 },
+  
+  confirmationBox: { marginTop: 25, padding: 16, backgroundColor: '#e8f5e9', borderRadius: 12, marginHorizontal: 16, borderWidth: 1, borderColor: '#c8e6c9' },
+  confirmationText: { color: '#2e7d32', fontWeight: 'bold', textAlign: 'center', fontSize: 16 },
+  
+  closeButton: { backgroundColor: '#2d3436', padding: 16, borderRadius: 16, margin: 20, alignItems: 'center', marginBottom: 50 },
+  closeButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 16, textTransform: 'uppercase' }
 });
