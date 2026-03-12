@@ -4,76 +4,106 @@ import { LieuCulturel } from '../types';
 
 interface LieuCardProps {
   lieu: LieuCulturel;
-  onPressDetails: () => void; // Fonction déclenchée quand on clique sur "Voir plus"
+  onPressDetails: () => void;
+  distanceText?: string;
 }
 
-export const LieuCard: React.FC<LieuCardProps> = ({ lieu, onPressDetails }) => {
+export const LieuCard: React.FC<LieuCardProps> = ({ lieu, onPressDetails, distanceText }) => {
   return (
     <View style={styles.card}>
-      {/* L'image aléatoire demandée par le sujet */}
-      <Image 
-        source={{ uri: 'https://picsum.photos/200' }} 
-        style={styles.image} 
+
+      <Image
+        source={{ uri: 'https://picsum.photos/400' }}
+        style={styles.image}
       />
-      
-      <View style={styles.infoContainer}>
-        {/* Le titre et l'adresse */}
-        <Text style={styles.title} numberOfLines={2}>{lieu.nom_usuel}</Text>
-        <Text style={styles.address} numberOfLines={2}>{lieu.adresse}</Text>
-        
-        {/* Le bouton "Voir plus" */}
-        <TouchableOpacity style={styles.button} onPress={onPressDetails}>
-          <Text style={styles.buttonText}>Voir plus</Text>
+
+      <View style={styles.content}>
+
+        <Text style={styles.title}>
+          {lieu.nom_usuel}
+        </Text>
+
+        <Text style={styles.address}>
+          📍 {lieu.adresse}
+        </Text>
+
+        {distanceText && (
+          <Text style={styles.distance}>
+            🚶 {distanceText}
+          </Text>
+        )}
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={onPressDetails}
+        >
+          <Text style={styles.buttonText}>
+            Voir les détails
+          </Text>
         </TouchableOpacity>
+
       </View>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+
   card: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    marginVertical: 8,
+    backgroundColor: "#fff",
     marginHorizontal: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    marginVertical: 10,
+    borderRadius: 16,
+    overflow: "hidden",
+
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3, // Ombre sur Android
-    overflow: 'hidden',
+    shadowRadius: 6,
+
+    elevation: 5
   },
+
   image: {
-    width: 100,
-    height: '100%',
+    width: "100%",
+    height: 160
   },
-  infoContainer: {
-    flex: 1,
-    padding: 12,
-    justifyContent: 'space-between',
+
+  content: {
+    padding: 16
   },
+
   title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 4,
-    color: '#2c3e50',
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#2c3e50",
+    marginBottom: 6
   },
+
   address: {
-    fontSize: 12,
-    color: '#7f8c8d',
-    marginBottom: 10,
+    fontSize: 13,
+    color: "#7f8c8d",
+    marginBottom: 6
   },
+
+  distance: {
+    fontSize: 13,
+    color: "#e67e22",
+    fontWeight: "600",
+    marginBottom: 12
+  },
+
   button: {
-    backgroundColor: '#e67e22',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 6,
-    alignSelf: 'flex-start',
+    backgroundColor: "#e67e22",
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center"
   },
+
   buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 12,
-  },
+    color: "#fff",
+    fontWeight: "bold"
+  }
+
 });
