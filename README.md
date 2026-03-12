@@ -6,6 +6,9 @@
 ---
 
 ## 1. Architecture Globale de l'Application
+
+![Architecture du Projet](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Joud04/Urban-Explorer/main/architecture.puml)
+
 L'application a été structurée selon les standards de l'industrie pour séparer proprement la logique de l'interface visuelle :
 * **Découpage des composants :**
   * `/screens` : Contient les vues principales de l'application (Discovery, Map, Profile).
