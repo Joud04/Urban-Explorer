@@ -114,26 +114,3 @@ Lors du développement, particulièrement lors de l'Étape 1 (Mise en place de l
 ### 5. L'UX de la page de Détails (Calendrier)
 * **Symptôme :** Conflit de navigation pour passer de la liste des lieux à la page de détails (calendrier).
 * **Solution :** Conformément aux autorisations du sujet ("ou via une fenêtre Modal"), j'ai opté pour une approche par `Modal` native. Cela évite d'alourdir la pile de navigation (Stack), offre une meilleure expérience utilisateur (animation de glissement) et a permis de stabiliser définitivement l'application.
-
----
-
-## 6. Fonctionnalités Validées
-[x] Navigation : Bottom Tab Navigator fonctionnel.
-
-[x] API : Récupération asynchrone (fetch) des données de la Ville de Paris.
-
-[x] UI : Affichage en FlatList avec un style Flexbox propre et moderne.
-
-[x] Carte Native : Intégration de react-native-maps, centrage sur Paris et affichage dynamique des marqueurs (Markers) basés sur les coordonnées de l'API.
-
-[x] Calendrier : Utilisation de react-native-calendars au sein d'une Modal pour sélectionner une date, avec retour visuel (State).
-
-[x] Appareil Photo : Implémentation de expo-image-picker pour la prise de selfie, gestion des permissions et affichage conditionnel de l'avatar.
-
-[x] (Bonus) Stockage Local : Sauvegarde persistante de la photo de profil et des dates de visites avec @react-native-async-storage/async-storage.
-
-[x] (Bonus) Géolocalisation : Intégration de expo-location pour la gestion du positionnement.
-
-[x] (Bonus) Recherche : Barre de recherche dynamique avec filtrage de la liste en temps réel.
-
-[x] (Bonus) Animations Natives : Apparition en fondu (Fade-In) des cartes et animation de respiration (Pulse) sur le bouton de l'appareil photo.
