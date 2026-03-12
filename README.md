@@ -1,6 +1,6 @@
-# 🏙️ Urban Explorer - TP Final React Native
+# Urban Explorer - TP Final React Native
 
-## 📝 Description du Projet
+## Description du Projet
 "Urban Explorer" est une application mobile de type City Guide développée en React Native (Expo) avec TypeScript. Elle permet de découvrir des événements et lieux culturels parisiens, de les visualiser sur une carte, de planifier une visite via un calendrier et de prendre un selfie souvenir.
 
 ---
@@ -35,7 +35,7 @@ Lors du développement, particulièrement lors de l'Étape 1 (Mise en place de l
 
 ---
 
-## ✅ Fonctionnalités Validées
+## Fonctionnalités Validées
 - [x] **Navigation :** Bottom Tab Navigator fonctionnel.
 - [x] **API :** Récupération asynchrone (`fetch`) des données de la Ville de Paris.
 - [x] **UI :** Affichage en `FlatList` avec un style Flexbox propre (Composant `LieuCard`).
