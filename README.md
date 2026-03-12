@@ -5,6 +5,42 @@
 
 ---
 
+## 🚀 Installation et Exécution
+Pour faire tourner ce projet sur votre machine, veuillez suivre ces commandes étape par étape dans votre terminal :
+
+**1. Installer les dépendances de base du projet :**
+```bash
+npm i
+```
+
+**2. Installer les modules de Navigation et d'Icônes :**
+
+```bash
+npm install @react-navigation/bottom-tabs @react-navigation/native-stack
+npx expo install @expo/vector-icons
+```
+
+**3. Installer les modules Natifs (Calendrier & Caméra) :**
+
+```bash
+npm install react-native-calendars
+npx expo install expo-image-picker
+```
+
+**4. Outils réseau (si besoin d'un tunnel sécurisé) :**
+
+```bash
+npm install -g @expo/ngrok
+```
+
+**5. Lancer l'application (en vidant le cache pour éviter les bugs) :**
+
+```bash
+npx expo start -c --tunnel
+```
+
+---
+
 ## Difficultés Rencontrées et Résolution des Bugs (Troubleshooting)
 Lors du développement, particulièrement lors de l'Étape 1 (Mise en place de la navigation), plusieurs défis techniques ont été rencontrés et résolus :
 
