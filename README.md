@@ -5,7 +5,7 @@
 
 ---
 
-## 🚀 Installation et Exécution
+## Installation et Exécution
 Pour faire tourner ce projet sur votre machine, veuillez suivre ces commandes étape par étape dans votre terminal :
 
 **1. Installer les dépendances de base du projet :**
