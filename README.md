@@ -9,6 +9,7 @@
 Pour faire tourner ce projet sur votre machine, veuillez suivre ces commandes étape par étape dans votre terminal :
 
 **1. Installer les dépendances de base du projet :**
+
 ```bash
 npm i
 ```
@@ -20,11 +21,12 @@ npm install @react-navigation/bottom-tabs @react-navigation/native-stack
 npx expo install @expo/vector-icons
 ```
 
-**3. Installer les modules Natifs (Calendrier & Caméra) :**
-
+**3. Installer les modules Natifs (Calendrier, Caméra, Localisation & Stockage) :**
 ```bash
 npm install react-native-calendars
 npx expo install expo-image-picker
+npx expo install expo-location
+npx expo install @react-native-async-storage/async-storage
 ```
 
 **4. Outils réseau (si besoin d'un tunnel sécurisé) :**
@@ -71,10 +73,19 @@ Lors du développement, particulièrement lors de l'Étape 1 (Mise en place de l
 
 ---
 
-## Fonctionnalités Validées
-- [x] **Navigation :** Bottom Tab Navigator fonctionnel.
-- [x] **API :** Récupération asynchrone (`fetch`) des données de la Ville de Paris.
-- [x] **UI :** Affichage en `FlatList` avec un style Flexbox propre (Composant `LieuCard`).
-- [x] **Carte Native :** Intégration de `react-native-maps`, centrage sur Paris et affichage dynamique des marqueurs (Markers) basés sur les coordonnées de l'API.
-- [x] **Calendrier :** Utilisation de `react-native-calendars` au sein d'une Modal pour sélectionner une date, avec retour visuel (State).
-- [x] **Appareil Photo :** Implémentation de `expo-image-picker` pour la prise de selfie, gestion des permissions et affichage conditionnel de l'avatar.
+Fonctionnalités Validées
+[x] Navigation : Bottom Tab Navigator fonctionnel.
+
+[x] API : Récupération asynchrone (fetch) des données de la Ville de Paris.
+
+[x] UI : Affichage en FlatList avec un style Flexbox propre (Composant LieuCard).
+
+[x] Carte Native : Intégration de react-native-maps, centrage sur Paris et affichage dynamique des marqueurs (Markers) basés sur les coordonnées de l'API.
+
+[x] Calendrier : Utilisation de react-native-calendars au sein d'une Modal pour sélectionner une date, avec retour visuel (State).
+
+[x] Appareil Photo : Implémentation de expo-image-picker pour la prise de selfie, gestion des permissions et affichage conditionnel de l'avatar.
+
+[x] (Bonus) Stockage Local : Sauvegarde persistante de la photo de profil et des dates de visites avec @react-native-async-storage/async-storage.
+
+[x] (Bonus) Géolocalisation : Intégration de expo-location pour la gestion du positionnement.
