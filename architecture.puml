@@ -1,7 +1,5 @@
 @startuml UrbanExplorerArchitecture
 
-title Architecture de l'application Urban Explorer
-
 package "Application" {
 
     [App.tsx] --> [NavigationContainer]
