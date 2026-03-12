@@ -15,7 +15,7 @@ export const MapScreen: React.FC = () => {
     getUserLocation();
   }, []);
 
-  // 📍 Récupérer la position de l'utilisateur
+  // Récupérer la position de l'utilisateur
   const getUserLocation = async () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -33,7 +33,7 @@ export const MapScreen: React.FC = () => {
     }
   };
 
-  // 📡 Récupérer les lieux depuis l'API Paris
+  // Récupérer les lieux depuis l'API Paris
   const fetchLieux = async () => {
     try {
       const response = await fetch(

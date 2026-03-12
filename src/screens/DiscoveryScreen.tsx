@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// 🔍 NOUVEAU : On importe TextInput pour la barre de recherche
 import { View, Text, StyleSheet, FlatList, ActivityIndicator, Alert, Modal, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,7 +20,7 @@ export const DiscoveryScreen: React.FC = () => {
   const [selectedLieu, setSelectedLieu] = useState<LieuCulturel | null>(null);
   const [savedDates, setSavedDates] = useState<Record<string, string>>({});
   
-  // 🔍 NOUVEAU : Le State qui va retenir le texte tapé dans la barre de recherche
+  // Le State qui va retenir le texte tapé dans la barre de recherche
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -70,7 +69,7 @@ export const DiscoveryScreen: React.FC = () => {
     }
   };
 
-  // 🔍 NOUVEAU : On filtre la liste des lieux en temps réel !
+  //On filtre la liste des lieux en temps réel !
   // Si searchQuery est vide, ça renvoie tout. Sinon, ça cherche les correspondances dans le nom.
   const filteredLieux = lieux.filter(lieu => 
     lieu.nom_usuel.toLowerCase().includes(searchQuery.toLowerCase())
@@ -89,7 +88,7 @@ export const DiscoveryScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       
-      {/* 🔍 NOUVEAU : La Barre de recherche affichée tout en haut */}
+      {/* La Barre de recherche affichée tout en haut */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -102,13 +101,13 @@ export const DiscoveryScreen: React.FC = () => {
       </View>
 
       <FlatList
-        data={filteredLieux} // 🔍 NOUVEAU : On utilise la liste filtrée au lieu de la liste brute !
+        data={filteredLieux} // On utilise la liste filtrée au lieu de la liste brute !
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <LieuCard lieu={item} onPressDetails={() => setSelectedLieu(item)} />
         )}
         contentContainerStyle={{ paddingBottom: 20, paddingTop: 10 }}
-        // 🔍 NOUVEAU : Message au cas où la recherche ne donne aucun résultat
+        // Message au cas où la recherche ne donne aucun résultat
         ListEmptyComponent={
           <Text style={styles.emptyText}>Aucun événement ne correspond à "{searchQuery}"</Text>
         }
@@ -155,7 +154,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8f9fa' },
   center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   
-  // 🔍 NOUVEAU : Styles pour la barre de recherche
+  // Styles pour la barre de recherche
   searchContainer: {
     backgroundColor: '#fff',
     padding: 10,
@@ -181,7 +180,6 @@ const styles = StyleSheet.create({
     color: '#7f8c8d',
     fontStyle: 'italic',
   },
-  // --- Le reste n'a pas changé ---
   modalContainer: { flex: 1, backgroundColor: '#f8f9fa' },
   headerImage: { width: '100%', height: 150 },
   infoContainer: { padding: 15, backgroundColor: '#fff', marginBottom: 15 },

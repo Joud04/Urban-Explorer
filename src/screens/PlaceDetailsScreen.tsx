@@ -13,10 +13,10 @@ LocaleConfig.locales['fr'] = {
 LocaleConfig.defaultLocale = 'fr';
 
 export const PlaceDetailsScreen: React.FC<{ route: any }> = ({ route }) => {
-  // 1. On récupère les données du lieu cliqué depuis la route de navigation
+  // On récupère les données du lieu cliqué depuis la route de navigation
   const { lieu } = route.params as { lieu: LieuCulturel };
   
-  // 2. Le state pour stocker la date sélectionnée (ex: "2024-05-12")
+  // Le state pour stocker la date sélectionnée (ex: "2024-05-12")
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   return (
@@ -30,7 +30,7 @@ export const PlaceDetailsScreen: React.FC<{ route: any }> = ({ route }) => {
 
       <Text style={styles.subtitle}>📅 Planifiez votre visite :</Text>
 
-      {/* 3. Le Calendrier Natif */}
+      {/*Le Calendrier Natif */}
       <Calendar
         // Événement déclenché quand on clique sur un jour
         onDayPress={(day: any) => {
@@ -46,7 +46,7 @@ export const PlaceDetailsScreen: React.FC<{ route: any }> = ({ route }) => {
         }}
       />
 
-      {/* 4. Le message de confirmation (Affiché uniquement SI une date est choisie) */}
+      {/*Le message de confirmation (Affiché uniquement SI une date est choisie) */}
       {selectedDate && (
         <View style={styles.confirmationBox}>
           <Text style={styles.confirmationText}>

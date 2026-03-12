@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const ProfileScreen: React.FC = () => {
   const [photoUri, setPhotoUri] = useState<string | null>(null);
 
-  // 👉 1. AU CHARGEMENT : On va chercher la photo sauvegardée
+  // AU CHARGEMENT : On va chercher la photo sauvegardée
   useEffect(() => {
     loadSavedPhoto();
   }, []);
@@ -41,7 +41,7 @@ export const ProfileScreen: React.FC = () => {
         const uri = result.assets[0].uri;
         setPhotoUri(uri);
         
-        // 👉 2. A LA CAPTURE : On sauvegarde le lien de la nouvelle photo
+        // A LA CAPTURE : On sauvegarde le lien de la nouvelle photo
         await AsyncStorage.setItem('@profile_photo', uri);
       }
     } catch (error) {
